@@ -159,6 +159,32 @@ docker compose up -d --build
 
 Open web browser and goto the IP address of the computer/VM: http://localhost:7860
 
+## 4. Use with Google Colab
+To use Flux Gym in Google Colab, follow these steps:
+
+1. Open Google Colab and create a new notebook.
+2. Insert the following commands into the first cell and run it to set up and start the Gradio app:
+
+```
+# Clone the Flux Gym repository
+!git clone https://github.com/cocktailpeanut/fluxgym
+%cd fluxgym
+
+# Clone the sd-scripts repository for training
+!git clone -b sd3 https://github.com/kohya-ss/sd-scripts
+
+# Install dependencies
+%cd sd-scripts
+!pip install -r requirements.txt
+%cd ..
+!pip install -r requirements.txt
+
+# Start the application and enable external sharing
+!python app.py --share
+```
+
+3. Once the app starts, you will receive a public Gradio URL that can be accessed in your browser.
+
 # Usage
 
 The usage is pretty straightforward:

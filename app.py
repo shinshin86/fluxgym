@@ -21,6 +21,8 @@ from argparse import Namespace
 import train_network
 import toml
 import re
+import argparse
+
 MAX_IMAGES = 150
 
 with open('models.yaml', 'r') as file:
@@ -1115,5 +1117,9 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     demo.load(fn=loaded, js=js, outputs=[hf_token, hf_login, hf_logout, repo_owner])
     refresh.click(update, inputs=listeners, outputs=[train_script, train_config, dataset_folder])
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run the Flux Gym.")
+    parser.add_argument("--share", action="store_true", help="Enable sharing to external access.")
+    args = parser.parse_args()
+
     cwd = os.path.dirname(os.path.abspath(__file__))
-    demo.launch(debug=True, show_error=True, allowed_paths=[cwd])
+    demo.launch(debug=True, show_error=True, allowed_paths=[cwd], share=args.share)
